@@ -1,0 +1,250 @@
+{
+  "id": "bwana-cloud",
+  "realm": "bwana-cloud",
+  "displayName": "Bwana Cloud",
+  "displayNameHtml": "<div class=\"kc-logo-text\"><span>Bwana</span><span>Cloud</span></div>",
+  "enabled": true,
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": false,
+  "rememberMe": true,
+  "verifyEmail": true,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": true,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "maxFailureWaitSeconds": 900,
+  "minimumQuickLoginWaitSeconds": 60,
+  "waitIncrementSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "maxDeltaTimeSeconds": 43200,
+  "failureFactor": 30,
+  "maxLoginFailures": 5,
+  "passwordPolicy": "length(12) and digits(1) and upperCase(1) and lowerCase(1) and specialChars(1)",
+  "defaultTheme": "keycloak.v2",
+  "adminTheme": "keycloak.v2",
+  "accountTheme": "keycloak.v2",
+  "emailTheme": "keycloak.v2",
+  "loginTheme": "keycloak.v2",
+  "internationalizationEnabled": true,
+  "supportedLocales": ["en", "fr", "ar", "sw", "zu", "yo"],
+  "defaultLocale": "en",
+  "browserSecurityHeaders": {
+    "contentSecurityPolicyReportOnly": "frame-src 'self'; frame-ancestors 'self'; object-src 'none';",
+    "xContentTypeOptions": "nosniff",
+    "xRobotsTag": "none",
+    "xXSSProtection": "1; mode=block",
+    "strictTransportSecurity": "max-age=31536000; includeSubDomains",
+    "xFrameOptions": "DENY",
+    "contentSecurityPolicy": "frame-src 'self'; frame-ancestors 'self'; object-src 'none';"
+  },
+  "attributes": {
+    "frontendUrl": "https://sso.bwana.cloud",
+    "adminUrl": "https://sso.bwana.cloud/admin",
+    "registrationAllowed": "true",
+    "registrationEmailAsUsername": "false",
+    "rememberMe": "true",
+    "verifyEmail": "true",
+    "loginWithEmailAllowed": "true",
+    "duplicateEmailsAllowed": "false",
+    "resetPasswordAllowed": "true",
+    "editUsernameAllowed": "true",
+    "bruteForceProtected": "true",
+    "permanentLockout": "false",
+    "maxFailureWaitSeconds": "900",
+    "minimumQuickLoginWaitSeconds": "60",
+    "waitIncrementSeconds": "60",
+    "quickLoginCheckMilliSeconds": "1000",
+    "maxDeltaTimeSeconds": "43200",
+    "failureFactor": "30",
+    "maxLoginFailures": "5",
+    "passwordPolicy": "length(12) and digits(1) and upperCase(1) and lowerCase(1) and specialChars(1)",
+    "defaultTheme": "keycloak.v2",
+    "adminTheme": "keycloak.v2",
+    "accountTheme": "keycloak.v2",
+    "emailTheme": "keycloak.v2",
+    "loginTheme": "keycloak.v2"
+  },
+  "requiredActions": [
+    {
+      "alias": "VERIFY_EMAIL",
+      "name": "Verify Email",
+      "providerId": "registration",
+      "enabled": true,
+      "defaultAction": false,
+      "priority": 10,
+      "config": {}
+    },
+    {
+      "alias": "UPDATE_PASSWORD",
+      "name": "Update Password",
+      "providerId": "registration",
+      "enabled": true,
+      "defaultAction": false,
+      "priority": 20,
+      "config": {}
+    },
+    {
+      "alias": "CONFIGURE_TOTP",
+      "name": "Configure TOTP",
+      "providerId": "totp",
+      "enabled": true,
+      "defaultAction": false,
+      "priority": 30,
+      "config": {}
+    }
+  ],
+  "browserFlow": [
+    "identity-provider-redirector",
+    "browser",
+    "direct-grant-validate-password",
+    "auth-cookie",
+    "auth-spnego",
+    "auth-x509-remote",
+    "auth-kerberos"
+  ],
+  "directGrantFlow": [
+    "direct-grant-validate-password",
+    "auth-cookie"
+  ],
+  "roles": {
+    "realm": [
+      {
+        "id": "admin",
+        "name": "admin",
+        "description": "Administrator access to all Bwana Cloud services",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "bwana-cloud",
+        "attributes": {}
+      },
+      {
+        "id": "developer",
+        "name": "developer",
+        "description": "Developer access with coding and deployment permissions",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "bwana-cloud",
+        "attributes": {}
+      },
+      {
+        "id": "business-user",
+        "name": "business-user",
+        "description": "Business user with access to productivity tools",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "bwana-cloud",
+        "attributes": {}
+      },
+      {
+        "id": "support",
+        "name": "support",
+        "description": "Support staff with limited administrative access",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "bwana-cloud",
+        "attributes": {}
+      }
+    ]
+  },
+  "defaultRoles": [
+    "business-user"
+  ],
+  "clients": [
+    {
+      "clientId": "wordpress-bwana",
+      "name": "WordPress Bwana Cloud",
+      "description": "WordPress integration for Bwana Cloud SSO",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "wordpress-secret-placeholder",
+      "redirectUris": [
+        "https://bwana.cloud/*",
+        "https://bwana.cloud/wp-admin/admin-ajax.php",
+        "https://bwana.cloud/wp-login.php"
+      ],
+      "webOrigins": [
+        "https://bwana.cloud"
+      ],
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": false,
+      "fullScopeAllowed": false,
+      "attributes": {
+        "saml.assertion.signature": "RSA_SHA256",
+        "saml.multivalued.roles": "false",
+        "saml.force.post.binding": "false",
+        "saml.server.signature": "RSA_SHA256",
+        "saml.server.signature.keyinfo": "true",
+        "exclude.session.state.from.auth.response": "false"
+      }
+    },
+    {
+      "clientId": "coder-bwana",
+      "name": "Coder Bwana Cloud",
+      "description": "Coder development environment SSO",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "coder-secret-placeholder",
+      "redirectUris": [
+        "https://coder.bwana.cloud/*",
+        "https://coder.bwana.cloud/oauth/callback"
+      ],
+      "webOrigins": [
+        "https://coder.bwana.cloud"
+      ],
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": false,
+      "fullScopeAllowed": false
+    },
+    {
+      "clientId": "plane-bwana",
+      "name": "Plane Bwana Cloud",
+      "description": "Plane project management SSO",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "plane-secret-placeholder",
+      "redirectUris": [
+        "https://plane.bwana.cloud/*",
+        "https://plane.bwana.cloud/auth/callback"
+      ],
+      "webOrigins": [
+        "https://plane.bwana.cloud"
+      ],
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": false,
+      "fullScopeAllowed": false
+    },
+    {
+      "clientId": "anythingllm-bwana",
+      "name": "AnythingLLM Bwana Cloud",
+      "description": "AnythingLLM AI assistant SSO",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "anythingllm-secret-placeholder",
+      "redirectUris": [
+        "https://chat.bwana.cloud/*",
+        "https://chat.bwana.cloud/auth/callback"
+      ],
+      "webOrigins": [
+        "https://chat.bwana.cloud"
+      ],
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "serviceAccountsEnabled": true,
+      "authorizationServicesEnabled": false,
+      "fullScopeAllowed": false
+    }
+  ]
+}

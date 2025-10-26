@@ -1,0 +1,267 @@
+{
+  "identityProviders": [
+    {
+      "alias": "wordpress-bwana",
+      "displayName": "WordPress Users",
+      "providerId": "wordpress-bwana",
+      "enabled": true,
+      "updateProfileFirstLoginMode": "on",
+      "trustEmail": true,
+      "storeToken": true,
+      "addReadTokenRoleOnCreate": false,
+      "authenticateByDefault": false,
+      "linkOnly": false,
+      "hideOnLoginPage": false,
+      "guiOrder": "",
+      "config": {
+        "baseUrl": "https://bwana.cloud",
+        "clientId": "bwana-sso-client",
+        "clientSecret": "wordpress-federation-secret",
+        "useJwksUrl": false,
+        "syncRegistrations": true,
+        "autoImport": true,
+        "userFederationMapping": [
+          {
+            "fromAttribute": "email",
+            "toAttribute": "email",
+            "claim": "email"
+          },
+          {
+            "fromAttribute": "username",
+            "toAttribute": "preferred_username",
+            "claim": "preferred_username"
+          },
+          {
+            "fromAttribute": "first_name",
+            "toAttribute": "firstName",
+            "claim": "firstName"
+          },
+          {
+            "fromAttribute": "last_name",
+            "toAttribute": "lastName",
+            "claim": "lastName"
+          }
+        ]
+      }
+    },
+    {
+      "alias": "ldap-bwana",
+      "displayName": "Bwana LDAP Directory",
+      "providerId": "ldap-bwana",
+      "enabled": false,
+      "updateProfileFirstLoginMode": "on",
+      "trustEmail": true,
+      "storeToken": true,
+      "addReadTokenRoleOnCreate": false,
+      "authenticateByDefault": false,
+      "linkOnly": false,
+      "hideOnLoginPage": false,
+      "guiOrder": "",
+      "config": {
+        "connectionUrl": "ldap://ldap.bwana.cloud:389",
+        "bindDn": "cn=admin,dc=bwana,dc=cloud",
+        "bindCredential": "ldap-admin-password",
+        "startTls": "simple",
+        "useTruststoreSpi": "ldapsOnly",
+        "connectionTimeout": "5000",
+        "readTimeout": "30000",
+        "pagination": true,
+        "allowKerberosAuthentication": false,
+        "debug": false,
+        "useTruststoreSpi": "always",
+        "connectionPooling": true,
+        "connectionPoolSize": "10",
+        "connectionPoolValidationInterval": "30000",
+        "connectionPoolValidationTimeout": "5000",
+        "batchSizeForSync": "1000",
+        "fullSyncPeriod": "86400",
+        "changedSyncPeriod": "86400",
+        "lastSyncPeriod": "86400",
+        "usersDn": "ou=users,dc=bwana,dc=cloud",
+        "userObjectClasses": [
+          "inetOrgPerson",
+          "organizationalPerson"
+        ],
+        "importEnabled": true,
+        "editMode": "WRITABLE",
+        "syncRegistrations": true,
+        "vendor": "other",
+        "usernameLDAPAttribute": "uid",
+        "rdnLDAPAttribute": "uid",
+        "uuidLDAPAttribute": "entryUUID",
+        "customUserLDAPAttribute": "",
+        "userFederationMapping": [
+          {
+            "fromAttribute": "uid",
+            "toAttribute": "username",
+            "claim": "username"
+          },
+          {
+            "fromAttribute": "cn",
+            "toAttribute": "fullName",
+            "claim": "name"
+          },
+          {
+            "fromAttribute": "mail",
+            "toAttribute": "email",
+            "claim": "email"
+          }
+        ]
+      }
+    },
+    {
+      "alias": "social-google",
+      "displayName": "Google Social Login",
+      "providerId": "google",
+      "enabled": true,
+      "updateProfileFirstLoginMode": "on",
+      "trustEmail": true,
+      "storeToken": true,
+      "addReadTokenRoleOnCreate": false,
+      "authenticateByDefault": false,
+      "linkOnly": false,
+      "hideOnLoginPage": false,
+      "guiOrder": "",
+      "config": {
+        "clientId": "google-client-id",
+        "clientSecret": "google-client-secret",
+        "hostedDomain": "bwana.cloud",
+        "useJwksUrl": true,
+        "jwksUrl": "https://www.googleapis.com/oauth2/v3/certs",
+        "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+        "tokenUrl": "https://oauth2.googleapis.com/token",
+        "userInfoUrl": "https://www.googleapis.com/oauth2/v2/userinfo",
+        "linkUrl": "",
+        "logoutUrl": "https://accounts.google.com/logout",
+        "defaultScope": "openid email profile",
+        "extraScopes": "",
+        "acceptsPromptNoneFromClient": false,
+        "validateSignature": false,
+        "forwardParameters": [],
+        "disableUserInfo": false,
+        "userFederationMapping": [
+          {
+            "fromAttribute": "email",
+            "toAttribute": "email",
+            "claim": "email"
+          },
+          {
+            "fromAttribute": "name",
+            "toAttribute": "fullName",
+            "claim": "name"
+          },
+          {
+            "fromAttribute": "given_name",
+            "toAttribute": "firstName",
+            "claim": "firstName"
+          },
+          {
+            "fromAttribute": "family_name",
+            "toAttribute": "lastName",
+            "claim": "lastName"
+          },
+          {
+            "fromAttribute": "picture",
+            "toAttribute": "profilePictureUrl",
+            "claim": "picture"
+          }
+        ]
+      }
+    },
+    {
+      "alias": "social-microsoft",
+      "displayName": "Microsoft Social Login",
+      "providerId": "microsoft",
+      "enabled": true,
+      "updateProfileFirstLoginMode": "on",
+      "trustEmail": true,
+      "storeToken": true,
+      "addReadTokenRoleOnCreate": false,
+      "authenticateByDefault": false,
+      "linkOnly": false,
+      "hideOnLoginPage": false,
+      "guiOrder": "",
+      "config": {
+        "clientId": "microsoft-client-id",
+        "clientSecret": "microsoft-client-secret",
+        "hostedDomain": "bwana.cloud",
+        "useJwksUrl": true,
+        "jwksUrl": "https://login.microsoftonline.com/common/discovery/v2.0/keys",
+        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+        "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "userInfoUrl": "https://graph.microsoft.com/v1.0/me",
+        "linkUrl": "",
+        "logoutUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/logout",
+        "defaultScope": "openid email profile",
+        "extraScopes": "",
+        "acceptsPromptNoneFromClient": false,
+        "validateSignature": false,
+        "forwardParameters": [],
+        "disableUserInfo": false,
+        "userFederationMapping": [
+          {
+            "fromAttribute": "email",
+            "toAttribute": "email",
+            "claim": "email"
+          },
+          {
+            "fromAttribute": "displayName",
+            "toAttribute": "fullName",
+            "claim": "name"
+          },
+          {
+            "fromAttribute": "givenName",
+            "toAttribute": "firstName",
+            "claim": "firstName"
+          },
+          {
+            "fromAttribute": "surname",
+            "toAttribute": "lastName",
+            "claim": "lastName"
+          },
+          {
+            "fromAttribute": "userPrincipalName",
+            "toAttribute": "username",
+            "claim": "preferred_username"
+          }
+        ]
+      }
+    }
+  ],
+  "userFederationMappers": [
+    {
+      "name": "WordPress User Mapper",
+      "id": "wordpress-user-mapper",
+      "providerId": "wordpress-bwana",
+      "providerDisplayName": "WordPress Users",
+      "displayName": "WordPress User Attribute Mapper",
+      "config": {
+        "syncMode": "FORCE",
+        "template": "${ATTRIBUTE_VALUE}",
+        "attribute": [
+          "email",
+          "username",
+          "firstName",
+          "lastName"
+        ]
+      }
+    },
+    {
+      "name": "LDAP User Mapper",
+      "id": "ldap-user-mapper",
+      "providerId": "ldap-bwana",
+      "providerDisplayName": "Bwana LDAP Directory",
+      "displayName": "LDAP User Attribute Mapper",
+      "config": {
+        "syncMode": "INHERIT",
+        "template": "${ATTRIBUTE_VALUE}",
+        "attribute": [
+          "email",
+          "username",
+          "firstName",
+          "lastName"
+        ]
+      }
+    }
+  ]
+}
